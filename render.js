@@ -45,12 +45,16 @@ export const initlikeButton = () => {
       });
     }
   }
+  // document.querySelector('.add-form-text').scrollIntoView({behavior: 'smooth' })
+
+ 
 
 export const render = () => {
+  const formEl = document.getElementById('form');
   const appEl = document.getElementById('app');
-        const peopleHtml = peoples.map((people, index) => {
-         
-           return `<li data-name="${people.name}" data-id="${people.id}" class="comment">
+        const peopleHtml = `<p class="add-comment">Написать комментарий</p>` + peoples.map((people, index) => {
+           return `
+            <li data-name="${people.name}" data-id="${people.id}" class="comment">
                  <div class="comment-header">
                    <div >${people.name}</div>
                    <div id="time"> ${people.time}</div>
@@ -93,22 +97,34 @@ export const render = () => {
              <button disabled id="writeButton"  class="add-form-button">Написать</button>
          </div>
          </div>`
+       
 
          appEl.innerHTML = appHtml;
          initDeleteButton();
          initlikeButton();
          commetForm();
-
+        
         const commentInputEl = document.getElementById('commentInput');
         const writeButtonEl = document.getElementById('writeButton');
  
         const nameInputEl = document.getElementById('nameInput');
          nameInputEl.value = `${username}`;
 
-        commentInputEl.addEventListener('input', function(event) {
+        commentInputEl.addEventListener('input', ()=> {
           writeButtonEl.disabled = (commentInputEl.value === '');
         });
-              writeButtonEl.addEventListener('click', () => {
+
+        document.querySelector('.add-comment').addEventListener('click', ()=>{
+          document.getElementById('form').scrollIntoView({behavior:'smooth'})
+        })
+          // commentInputEl.keydown((ei)=> {
+          //   ei.preventDefault();
+          //   if (ei.ctrlKey && ei.keyCode == 13) {
+          //     console.log('ъуъ')
+          //   }
+          // });
+         
+              writeButtonEl.addEventListener('click', (e) => {
                 setTimeout(() => { commentInputEl.classList.remove('err');}, 1000 * 0.5);
 
                     if (commentInputEl.value === '') {
@@ -117,11 +133,12 @@ export const render = () => {
                     } 
                     if (commentInputEl.value != '') {
                       writeButtonEl.disabled = true;
-                      const formEl = document.getElementById('form');
                       writeButtonEl.textContent = 'Элемент добавляется...'  
                 postTodo();
                 formEl.innerHTML = 'Комментарии добавляются...';
 
-            }});
+            }}
+          );
+        
       }
 

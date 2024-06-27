@@ -38,6 +38,7 @@ export const renderLogin = ()=>{
   })
 
 enterButtonEl.addEventListener('click', ()=>{
+  document.querySelector(".body").scrollIntoView({behavior: 'smooth'})
     login({
         login:loginInpurEl.value,
         password:passwordInputEl.value,

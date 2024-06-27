@@ -103,9 +103,9 @@ export const mainView = ()=>{
            <br>` 
      }).join('');
 
-     appEl.innerHTML = appHtml + `<div class="main-authorization">
+     appEl.innerHTML = `<div class="main-authorization">
       <span id="mainAutho" class="main-autho-button">Авторизуйтесь
-      </span>, чтобы оставить комментарий </div>`;
+      </span>, чтобы оставить комментарий </div><br>` + appHtml;
     const mainAuthoEl = document.getElementById('mainAutho');
     mainAuthoEl.addEventListener('click', ()=>{
       renderLogin({render});
